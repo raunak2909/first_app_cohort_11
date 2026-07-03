@@ -19,10 +19,10 @@ void main(){
     print("$name, You are not eligible to vote!!");
   }
 
-  ///1. Find if the given no is ODD or EVEN.
-  ///2. Find the greatest of 3 nos.
-  ///3. Find the smallest of 3 nos.
-  ///4. Find if the given year is LEAP year or not.
+  ///1. Find if the given no is ODD or EVEN. (done)
+  ///2. Find the greatest of 3 nos. (done)
+  ///3. Find the smallest of 3 nos. (do it)
+  ///4. Find if the given year is LEAP year or not. (done)
   ///5. Write a program which asks about no1 and no2
   ///   then asks about the choice
   ///   from 1 for Addition
@@ -30,6 +30,6 @@ void main(){
   ///   3 for multiply
   ///   4 for division
   ///   5 for modulus
-  ///   then act accordingly!!
+  ///   then act accordingly!! (done)
 
 }
