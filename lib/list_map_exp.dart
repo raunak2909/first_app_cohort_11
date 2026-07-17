@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 void main() {
   /// 5 student data
   /// name,
@@ -63,22 +65,22 @@ void main() {
       "school" : "DPS"
     },
     {
-      "name": "Rajeev",
+      "name": "Rohan",
       "age": 16,
       "percentage": 86.32,
       "isFeePaid": true,
-      "rollNo": 56,
+      "rollNo": 61,
       "class" : "X",
-      "sec" : "A",
-      "fatherName" : "Rajesh",
-      "motherName" : "Suman",
+      "sec" : "B",
+      "fatherName" : "Ramesh",
+      "motherName" : "Shiya",
       "mobNo" : 9876543210,
       "marks" : {
-        "eng" : 87,
-        "hin" : 92,
-        "maths" : [99, 100],
-        "sci" : 98,
-        "sst" : 77,
+        "eng" : 56,
+        "hin" : 89,
+        "maths" : [79, 87],
+        "sci" : 76,
+        "sst" : 65,
       },
       "address" : "slkvnkjsnfv, klsdnbksf",
       "city" : "Jodhpur",
@@ -86,22 +88,22 @@ void main() {
       "school" : "DPS"
     },
     {
-      "name": "Rajeev",
+      "name": "Rajveer",
       "age": 16,
       "percentage": 86.32,
       "isFeePaid": true,
-      "rollNo": 56,
+      "rollNo": 72,
       "class" : "X",
-      "sec" : "A",
-      "fatherName" : "Rajesh",
-      "motherName" : "Suman",
+      "sec" : "C",
+      "fatherName" : "Raja",
+      "motherName" : "Dhara",
       "mobNo" : 9876543210,
       "marks" : {
-        "eng" : 87,
-        "hin" : 92,
-        "maths" : [99, 100],
-        "sci" : 98,
-        "sst" : 77,
+        "eng" : 96,
+        "hin" : 98,
+        "maths" : [90, 87],
+        "sci" : 89,
+        "sst" : 92,
       },
       "address" : "slkvnkjsnfv, klsdnbksf",
       "city" : "Jodhpur",
@@ -109,22 +111,22 @@ void main() {
       "school" : "DPS"
     },
     {
-      "name": "Rajeev",
+      "name": "Raghvendra",
       "age": 16,
       "percentage": 86.32,
       "isFeePaid": true,
       "rollNo": 56,
       "class" : "X",
       "sec" : "A",
-      "fatherName" : "Rajesh",
-      "motherName" : "Suman",
+      "fatherName" : "Rajan",
+      "motherName" : "Sonam",
       "mobNo" : 9876543210,
       "marks" : {
-        "eng" : 87,
-        "hin" : 92,
-        "maths" : [99, 100],
-        "sci" : 98,
-        "sst" : 77,
+        "eng" : 79,
+        "hin" : 98,
+        "maths" : [95, 70],
+        "sci" : 93,
+        "sst" : 78,
       },
       "address" : "slkvnkjsnfv, klsdnbksf",
       "city" : "Jodhpur",
@@ -133,12 +135,71 @@ void main() {
     },
   ];
 
-  for(int i = 0 ; i<studentDetails.length; i++){
+  /*for(int i = 0 ; i<studentDetails.length; i++){
     print(studentDetails[i]["name"]);
-  }
+  }*/
 
   /// 1. Get all the students name
   /// 2. Get all the students total marks out of 500
+  List<Map<String, dynamic>> listEngMarks = [];
+  List<Map<String, dynamic>> listHinMarks = [];
+  List<Map<String, dynamic>> listMathsMarks = [];
+  List<Map<String, dynamic>> listSciMarks = [];
+  List<Map<String, dynamic>> listSstMarks = [];
+  List<Map<String, dynamic>> allStuPercentage = [];
+  for(int i = 0 ; i<studentDetails.length; i++){
+    int engMarks = studentDetails[i]["marks"]["eng"];
+    int hinMarks = studentDetails[i]["marks"]["hin"];
+    num mathsMarks = (studentDetails[i]["marks"]["maths"][0]+studentDetails[i]["marks"]["maths"][1])/2;
+    int sciMarks = studentDetails[i]["marks"]["sci"];
+    int sstMarks = studentDetails[i]["marks"]["sst"];
+    listEngMarks.add({
+      "name" : studentDetails[i]["name"],
+      "marks" : engMarks
+    });
+    listHinMarks.add({
+      "name" : studentDetails[i]["name"],
+      "marks" : hinMarks
+    });
+    listMathsMarks.add({
+      "name" : studentDetails[i]["name"],
+      "marks" : mathsMarks
+    });
+    listSciMarks.add({
+      "name" : studentDetails[i]["name"],
+      "marks" : sciMarks
+    });
+    listSstMarks.add({
+      "name" : studentDetails[i]["name"],
+      "marks" : sstMarks
+    });
+
+    num totalMarks = engMarks+hinMarks+mathsMarks+sciMarks+sstMarks;
+    num percentage = (totalMarks/500) * 100;
+    allStuPercentage.add({
+      "name" : studentDetails[i]["name"],
+      "percentage" : percentage
+    });
+
+    //print("${studentDetails[i]["name"]}'s total marks: $totalMarks and percentage: $percentage");
+
+  }
+
+  getTheRank(allStuPercentage);
+
+  /*getHighestLowestMarksStudent(listEngMarks, "English", false);
+  getHighestLowestMarksStudent(listEngMarks, "English", true);
+  getHighestLowestMarksStudent(listHinMarks, "Hindi", false);
+  getHighestLowestMarksStudent(listHinMarks, "Hindi", true);
+  getHighestLowestMarksStudent(listMathsMarks, "Maths", false);
+  getHighestLowestMarksStudent(listMathsMarks, "Maths", true);
+  getHighestLowestMarksStudent(listSciMarks, "Science", false);
+  getHighestLowestMarksStudent(listSciMarks, "Science", true);
+  getHighestLowestMarksStudent(listSstMarks, "SST", false);
+  getHighestLowestMarksStudent(listSstMarks, "SST", true);*/
+
+
+
   /// 3. Get all the students total maths marks out of 200 and calculate average
   /// 4. Find who score the highest in each subject
   /// 5. Find who score the lowest in each subject
@@ -167,5 +228,55 @@ void main() {
   /// attendance of last week (M-F) -> P, Ab
 
   /// print maths paper II marks
-  print("${studentDetails[0]["name"]}'s maths II paper marks: ${studentDetails[0]["marks"]["maths"][0]}");
+  //print("${studentDetails[0]["name"]}'s maths II paper marks: ${studentDetails[0]["marks"]["maths"][0]}");
 }
+
+getTheRank(List<Map<String, dynamic>> percentageData){
+  List<num> percentage = [];
+  for(int i = 0; i< percentageData.length; i++){
+    percentage.add(percentageData[i]["percentage"]);
+  }
+  percentage.sort();
+  List<num> rankedData = percentage.reversed.toList();
+
+  for(int i = 0; i<rankedData.length; i++){
+    for(int j = 0; j<percentageData.length; j++){
+      if(rankedData[i]==percentageData[j]["percentage"]){
+        print("${percentageData[j]["name"]}'s rank is ${i+1}");
+      }
+    }
+  }
+
+}
+
+
+getHighestLowestMarksStudent(
+    List<Map<String, dynamic>> marksData,
+    String subject,
+    bool isLowest
+    ) {
+  String name = "";
+  num marks = isLowest ? 100 : 0;
+
+  if(isLowest){
+    for(int i = 0; i< marksData.length; i++){
+      if(marks >= marksData[i]["marks"]){
+        marks = marksData[i]["marks"];
+        name = marksData[i]["name"];
+      }
+    }
+
+    print("$name's lowest marks is $marks in $subject");
+  } else {
+    for(int i = 0; i< marksData.length; i++){
+      if(marks <= marksData[i]["marks"]){
+        marks = marksData[i]["marks"];
+        name = marksData[i]["name"];
+      }
+    }
+
+    print("$name's highest marks is $marks in $subject");
+  }
+}
+
+
